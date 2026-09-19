@@ -1,0 +1,35 @@
+[
+  {
+    "id": 2,
+    "title": "Görev doğrulama kuralları",
+    "description": "Zorunlu alanlar ve hatalı istekler kontrol edilecek.",
+    "status": "in_progress",
+    "priority": "medium",
+    "assignee": "Yiğit Kaan Bilir",
+    "projectId": 1,
+    "createdAt": "2026-09-19T10:15:00.000Z",
+    "updatedAt": "2026-09-19T10:15:00.000Z"
+  },
+  {
+    "id": 3,
+    "title": "Postman testlerini yazma",
+    "description": "CRUD istekleri için örnek test adımları hazırlanacak.",
+    "status": "pending",
+    "priority": "low",
+    "assignee": "Yiğit Kaan Bilir",
+    "projectId": 1,
+    "createdAt": "2026-09-19T10:30:00.000Z",
+    "updatedAt": "2026-09-19T10:30:00.000Z"
+  },
+  {
+    "id": 4,
+    "title": "Taskora mobil entegrasyonu",
+    "description": "Mobil uygulama için görev API entegrasyonu hazırlanacak",
+    "status": "pending",
+    "priority": "high",
+    "assignee": "Yiğit Kaan Bilir",
+    "projectId": 1,
+    "createdAt": "2026-09-19T10:13:39.988Z",
+    "updatedAt": "2026-09-19T10:13:39.988Z"
+  }
+]

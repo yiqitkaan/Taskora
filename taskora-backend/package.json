@@ -1,0 +1,15 @@
+{
+  "name": "taskora-backend",
+  "version": "1.0.0",
+  "description": "Taskora görev yönetimi REST API",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
