@@ -18,7 +18,7 @@ Microsoft SQL Server tabanlı merkezi veri katmanı olarak planlanmıştır. Hen
 
 ### Taskora Mobile
 
-Flutter ve Dart tabanlı mobil uygulama olarak planlanmıştır. Henüz geliştirilmemiştir.
+[`taskora-mobile/`](taskora-mobile/) klasöründe Flutter ve Dart tabanlı mobil görev takip uygulaması bulunur. Yerel ve kalıcı JSON verisiyle giriş/kayıt, GridView kartları, liste görünümü, görev ekleme/düzenleme, arama, filtreleme, detay ve durum güncelleme akışı sunar.
 
 ## Planlanan Mimari
 
