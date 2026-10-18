@@ -124,8 +124,7 @@ taskora-mobile/
 - `01-ana-sayfa.png`: kart tabanlı görev ana sayfası
 - `02-gorev-listesi.png`: dinamik görev liste görünümü
 - `03-gorev-detayi.png`: yerel görselli görev detay ekranı
-- `04-yeni-gorev.png`: doğrulamalı yeni görev formu
-- `05-giris-ekrani.png`: JSON tabanlı kullanıcı giriş ekranı
+- `04-giris-ekrani.png`: JSON tabanlı kullanıcı giriş ekranı
 
 ## Teknik Kapsam
 
