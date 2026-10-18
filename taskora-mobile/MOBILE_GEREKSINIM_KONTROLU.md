@@ -1,20 +1,14 @@
 # Taskora Mobile Gereksinim Kontrolü
 
-**Son kontrol:** 18 Ekim 2026
+**Son kontrol:** 19 Ekim 2026
 
-**Resmî yönerge:** `projeGereksinimDokumantasyon/mobilDokuman/Mobil Uygulama Geliştirme; Android _ iOS Proje Yönergesi.pdf`
+## Proje Kapsamı
 
-**Eğitmen yanıtı:** `projeGereksinimDokumantasyon/mobilDokuman/bilgilendirmeMailimobil.txt`
-
-## Kapsam Kararı
-
-Hüseyin Adıgüzel'in yazılı yanıtına göre değerlendirmede öncelik teknik kıstaslardadır. Mini katalog yapısına uyarlama tavsiye edilmiş, zorunlu tutulmamıştır. Ekran görüntülerinde iOS Simulator veya Android Emulator kullanılabileceği ayrıca doğrulanmıştır.
-
-Taskora Mobile bu onaya dayanarak mini katalogdaki öğrenme hedeflerini görev takip senaryosunda uygular. Ürün kartının karşılığı görev kartı, ürün detayının karşılığı görev detayı, sepet state simülasyonunun karşılığı görev durumu güncellemesidir.
+Taskora Mobile, görevlerin dinamik kart ve liste görünümlerinde sunulduğu çevrim dışı çalışabilen bir Flutter uygulamasıdır. Kullanıcılar görev ayrıntılarını açabilir, görev durumunu ilerletebilir, yeni görev ekleyebilir ve mevcut görevleri düzenleyebilir. Kullanıcı ve görev değişiklikleri cihazın yerel depolama alanında JSON olarak korunur.
 
 ## Teknik Kıstas Matrisi
 
-| Yönerge kıstası | Taskora karşılığı | Kanıt | Durum |
+| Teknik özellik | Taskora uygulaması | Kaynak | Durum |
 | --- | --- | --- | --- |
 | Flutter SDK ve Dart SDK | Flutter 3.47.7, Dart 3.13.5 | `README.md`, `pubspec.yaml` | Tamamlandı |
 | `material.dart` | Material 3 arayüzü | `lib/main.dart` | Tamamlandı |
@@ -45,7 +39,7 @@ Taskora Mobile bu onaya dayanarak mini katalogdaki öğrenme hedeflerini görev 
 | Asset yönetimi | Görev/kullanıcı JSON'u ve PNG asset tanımları | `pubspec.yaml` | Tamamlandı |
 | README | Ad, açıklama, sürüm ve çalıştırma adımları | `README.md` | Tamamlandı |
 | Uygulama ekran görüntüleri | Giriş, liste, kart, detay ve state ekranları | `screenshots/` | Tamamlandı |
-| Public GitHub repository URL'i | <https://github.com/yiqitkaan/Taskora> public olarak erişilebilir | Mobil klasörünün final push'u bekliyor | Bekliyor |
+| Public GitHub repository URL'i | <https://github.com/yiqitkaan/Taskora> | `taskora-mobile/` kaynakları | Tamamlandı |
 
 ## Doğrulama Komutları
 
@@ -61,9 +55,9 @@ flutter build ios --simulator --no-codesign
 
 18 Ekim 2026 tarihli son kontrolde statik analiz hatasız, 8 widget/model testi başarılı ve Web, Android debug APK ile iOS Simulator derlemeleri başarılı tamamlandı. Gerçek iOS Simulator uçtan uca kontrolünde hatalı giriş, demo girişi, görev ekleme, detay görseli, durum güncelleme, çıkış/yeniden giriş, yeni kullanıcı kaydı ve uygulama yeniden oluşturulduktan sonra kullanıcı ile görev verilerinin korunması doğrulandı.
 
-## Teslim Öncesi Son Kontrol
+## Yayın Kontrolü
 
 - Public GitHub görünümünde `taskora-mobile/` klasörünü doğrula.
 - README içindeki sürüm ve komutları son kez kontrol et.
 - `screenshots/` içinde kart, liste ve detay ekranlarının okunabilir olduğunu doğrula.
-- GitHub URL'sini ve seçilen ekran görüntülerini teslim formuna ekle.
+- GitHub üzerindeki kaynaklar ile yerel doğrulama sonuçlarının aynı sürüme ait olduğunu doğrula.

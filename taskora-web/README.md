@@ -50,7 +50,7 @@ GitHub'daki **yiqitkaan/Taskora** deposunu Netlify'a bağlayın. Base directory 
 
 ## Ekran Görüntüleri
 
-Gerçek tarayıcıda alınmış Dashboard, yeni görev ve düzenleme ekranları `screenshots/` klasöründedir. Teslim formuna bu görsellerden uygun olanları yükleyebilirsiniz.
+Gerçek tarayıcıda alınmış Dashboard, yeni görev ve düzenleme ekranları `screenshots/` klasöründedir.
 
 ## Proje Yapısı
 
@@ -81,7 +81,3 @@ taskora-web/
 ## Geliştirici
 
 Yiğit Kaan Bilir
-
-## Program
-
-Software Persona Yazılım / Kariyer Merkezi / 18. Dönem

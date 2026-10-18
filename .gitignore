@@ -6,3 +6,7 @@ dist/
 .vscode/
 .idea/
 *.log
+Taskora-git-metadata-backup/
+ROADMAP.md
+dokumantasyon/
+projeGereksinimDokumantasyon/

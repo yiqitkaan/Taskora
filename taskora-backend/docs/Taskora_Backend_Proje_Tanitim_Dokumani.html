@@ -37,7 +37,7 @@
 </head>
 <body>
   <section class="cover">
-    <div class="eyebrow">Backend Geliştirme Bitirme Projesi</div>
+    <div class="eyebrow">Backend Geliştirme Projesi</div>
     <h1>TASKORA</h1>
     <div class="subtitle">Görev ve Ekip Yönetim Sistemi<br>REST API Proje Tanıtım ve Teknik Uygulama Dokümanı</div>
     <div>
@@ -45,9 +45,7 @@
       <span class="badge">Routing</span><span class="badge">Middleware</span><span class="badge">CRUD</span><span class="badge">JSON</span>
     </div>
     <div class="identity" style="margin-top: 34px">
-      <p><strong>Katılımcı:</strong> Yiğit Kaan Bilir</p>
-      <p><strong>Program:</strong> Software Persona Yazılım / Kariyer Merkezi / 18. Dönem</p>
-      <p><strong>Eğitim:</strong> Node.js ile Backend Programlama</p>
+      <p><strong>Geliştirici:</strong> Yiğit Kaan Bilir</p>
       <p><strong>Proje türü:</strong> REST API / Backend Geliştirme</p>
       <p><strong>Repository:</strong> github.com/yiqitkaan/Taskora</p>
       <p><strong>Sürüm ve tarih:</strong> 1.0.0 · 18 Ekim 2026</p>
@@ -56,7 +54,7 @@
 
   <h2>1. Proje Tanıtımı</h2>
   <p>Taskora, yazılım ekiplerinin görevlerini merkezi bir servis üzerinden oluşturması, çalışanlara ataması, durum ve öncelik bilgilerini takip etmesi için tasarlanmış bir görev yönetim platformudur. Bu doküman Taskora'nın Node.js ve Express.js ile geliştirilen backend modülünü kapsar.</p>
-  <p>Backend eğitim sürümü tamamen REST API mantığında çalışır. Veriler eğitim kapsamına uygun olarak yerel bir JSON dosyasında tutulur. Taskora Web, Taskora Database ve Taskora Mobile ayrı eğitim teslimleridir; bu sürümde backend ile doğrudan entegre değildir.</p>
+  <p>Backend tamamen REST API mantığında çalışır. Veriler yerel bir JSON dosyasında tutulur. Taskora Web, Taskora Database ve Taskora Mobile bu sürümde backend ile doğrudan entegre değildir.</p>
 
   <h3>1.1 Amaç</h3>
   <p>Projenin amacı; Node.js çalışma ortamı, Express.js sunucusu, routing, middleware, CRUD işlemleri, HTTP durum kodları ve JSON veri yönetimi konularını gerçek hayata yakın tek bir senaryoda uygulamaktır.</p>
@@ -82,8 +80,8 @@
     <tr><td>Express.js 4.21.2</td><td>HTTP sunucusu, route ve middleware altyapısı</td></tr>
     <tr><td>JavaScript / CommonJS</td><td>Controller, route ve uygulama mantığı</td></tr>
     <tr><td>JSON</td><td>Görev verilerinin yerel ve kalıcı biçimde saklanması</td></tr>
-    <tr><td>Postman</td><td>CRUD endpointlerinin çalıştırılması ve teslim kanıtlarının alınması</td></tr>
-    <tr><td>Git / GitHub</td><td>Versiyon kontrolü ve public repository teslimi</td></tr>
+    <tr><td>Postman</td><td>CRUD endpointlerinin çalıştırılması ve cevapların doğrulanması</td></tr>
+    <tr><td>Git / GitHub</td><td>Versiyon kontrolü ve kaynak kodun yayınlanması</td></tr>
   </table>
 
   <div class="page-break"></div>
@@ -229,11 +227,11 @@ GET /tasks?status=in_progress&amp;priority=medium</pre>
   <h2>7. JSON Veri Yönetimi</h2>
   <p>Controller her işlemde <code>src/data/tasks.json</code> dosyasını UTF-8 olarak okur ve içeriğin dizi olduğunu doğrular. Yazma işlemi önce süreç ID'sini içeren geçici bir dosyaya yapılır, ardından dosya yeniden adlandırılarak asıl veri dosyasının yerini alır. Böylece yarım yazılmış JSON bırakma riski azaltılır.</p>
   <p>Yeni ID, mevcut en yüksek ID'nin bir fazlasıdır. Oluşturma, güncelleme ve silme işlemleri dosyaya yazıldığı için sunucu kapatılıp açıldığında görev değişiklikleri korunur.</p>
-  <div class="callout">Bu teslimde veritabanı veya authentication bulunmaz. JSON dosyası eğitim kapsamındaki veri yönetimi gereksinimini karşılar. TaskoraDB entegrasyonu sonraki geliştirme aşamasıdır.</div>
+  <div class="callout">Bu sürümde veritabanı veya authentication bulunmaz. JSON dosyası yerel veri katmanı olarak kullanılır. TaskoraDB entegrasyonu sonraki geliştirme aşamasıdır.</div>
 
   <div class="page-break"></div>
   <h2>8. Test Planı ve Doğrulama</h2>
-  <h3>8.1 Zorunlu Postman akışı</h3>
+  <h3>8.1 Temel Postman akışı</h3>
   <ol>
     <li><strong>POST /tasks:</strong> Görev oluşturulur; <code>201 Created</code>.</li>
     <li><strong>GET /tasks:</strong> Yeni kayıt listede görülür; <code>200 OK</code>.</li>
@@ -241,7 +239,7 @@ GET /tasks?status=in_progress&amp;priority=medium</pre>
     <li><strong>PUT /tasks/:id:</strong> Durum ve öncelik değişir; <code>200 OK</code>.</li>
     <li><strong>DELETE /tasks/:id:</strong> Görev silinir; <code>200 OK</code>.</li>
   </ol>
-  <p>Hazır Postman koleksiyonu ilk cevaptaki ID'yi koleksiyon değişkenine kaydeder. Böylece detay, güncelleme ve silme istekleri aynı kaydı kullanır. Her zorunlu istekte method, URL, HTTP status ve response JSON görünür şekilde ekran görüntüsü alınır.</p>
+  <p>Hazır Postman koleksiyonu ilk cevaptaki ID'yi koleksiyon değişkenine kaydeder. Böylece detay, güncelleme ve silme istekleri aynı kaydı kullanır. Her istekte method, URL, HTTP status ve response JSON görünür şekilde doğrulanır.</p>
 
   <h3>8.2 Gerçek çalışma doğrulaması</h3>
   <p>18 Ekim 2026 tarihinde temiz bir geçici görevle uçtan uca HTTP testi uygulanmış ve başlangıç JSON'u test sonunda geri yüklenmiştir.</p>
@@ -265,9 +263,9 @@ npm start</pre>
   <p>Varsayılan adres <code>http://localhost:3000</code>'dir. Alternatif port için <code>PORT=4000 npm start</code> kullanılabilir.</p>
 
   <div class="page-break"></div>
-  <h2>10. Resmî Gereksinim Uyumu</h2>
+  <h2>10. Teknik Özellik Matrisi</h2>
   <table>
-    <tr><th>Resmî kıstas</th><th>Taskora karşılığı</th><th>Durum</th></tr>
+    <tr><th>Teknik özellik</th><th>Taskora karşılığı</th><th>Durum</th></tr>
     <tr><td>Node.js projesi ve Express.js</td><td>package.json ve Express 4 uygulaması</td><td class="check">Tamamlandı</td></tr>
     <tr><td>Klasör ve routing yapısı</td><td>controllers, routes, middleware, data</td><td class="check">Tamamlandı</td></tr>
     <tr><td>Görev ekleme</td><td>POST /tasks</td><td class="check">Tamamlandı</td></tr>
@@ -280,17 +278,17 @@ npm start</pre>
     <tr><td>README kurulum notu</td><td>Ayrıntılı kurulum, endpoint ve test rehberi</td><td class="check">Tamamlandı</td></tr>
     <tr><td>Proje tanıtım dokümanı</td><td>Bu PDF ve düzenlenebilir HTML kaynağı</td><td class="check">Tamamlandı</td></tr>
     <tr><td>Postman temel CRUD testi</td><td>Koleksiyon ve adım adım test rehberi</td><td class="check">Hazır</td></tr>
-    <tr><td>Postman ekran görüntüleri</td><td>screenshots klasöründe beş gerçek çıktı</td><td>Ayrı teslim kanıtları</td></tr>
+    <tr><td>Postman ekran görüntüleri</td><td>screenshots klasöründe beş gerçek çıktı</td><td class="check">Tamamlandı</td></tr>
     <tr><td>Public GitHub repository</td><td>github.com/yiqitkaan/Taskora</td><td class="check">Tamamlandı</td></tr>
   </table>
 
   <h2>11. İsteğe Bağlı Özellikler</h2>
-  <p>Resmî yönergede teslim dışı pratik olarak belirtilen durum ve öncelik filtreleri uygulanmıştır. Görev alanlarının doğrulanması ve açıklayıcı 400 cevapları da controller seviyesinde eklenmiştir. Arama, assignee filtresi, sayfalama, sıralama ve raporlama endpointleri mevcut eğitim teslimine dahil edilmemiştir.</p>
+  <p>Durum ve öncelik filtreleri uygulanmıştır. Görev alanlarının doğrulanması ve açıklayıcı 400 cevapları da controller seviyesinde eklenmiştir. Arama, assignee filtresi, sayfalama, sıralama ve raporlama endpointleri mevcut sürümde bulunmaz.</p>
 
   <h2>12. Sonuç</h2>
-  <p>Taskora Backend; çalışan REST API, eksiksiz görev CRUD operasyonları, ayrık routing/controller yapısı, logger middleware ve JSON veri yönetimiyle backend eğitiminin teknik hedeflerini karşılar. Kurulum README'si, proje tanıtım dokümanı, Postman koleksiyonu ve ekran görüntüsü rehberiyle teslim süreci tekrarlanabilir hale getirilmiştir.</p>
+  <p>Taskora Backend; çalışan REST API, eksiksiz görev CRUD operasyonları, ayrık routing/controller yapısı, logger middleware ve JSON veri yönetimi sunar. Kurulum README'si, proje tanıtım dokümanı, Postman koleksiyonu ve test rehberiyle doğrulama süreci tekrarlanabilir hale getirilmiştir.</p>
 
-  <div class="callout success"><strong>Teslim özeti:</strong> Kaynak kod + package.json/package-lock.json + README + proje tanıtım PDF'i + beş gerçek Postman ekran görüntüsü + public GitHub repository.</div>
-  <p class="small">Hazırlayan: Yiğit Kaan Bilir · Software Persona Yazılım / Kariyer Merkezi / 18. Dönem · 2026</p>
+  <div class="callout success"><strong>Proje özeti:</strong> Kaynak kod + package.json/package-lock.json + README + proje tanıtım PDF'i + Postman koleksiyonu ve gerçek test görüntüleri.</div>
+  <p class="small">Hazırlayan: Yiğit Kaan Bilir · 2026</p>
 </body>
 </html>

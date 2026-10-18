@@ -1,8 +1,8 @@
 # Taskora Backend — Postman Test ve Ekran Görüntüsü Rehberi
 
-Bu rehber, resmî backend yönergesinde istenen beş CRUD testini doğru sırayla çalıştırmak ve teslim ekran görüntülerini almak için hazırlanmıştır.
+Bu rehber, Taskora Backend'in beş temel CRUD isteğini doğru sırayla çalıştırmak ve sonuçları doğrulamak için hazırlanmıştır.
 
-## Teslim Sonunda Olması Gereken Dosyalar
+## Test Sonunda Oluşacak Dosyalar
 
 ```text
 taskora-backend/screenshots/
@@ -20,7 +20,7 @@ taskora-backend/screenshots/
 ### 1. Terminali açın ve backend klasörüne geçin
 
 ```bash
-cd /Users/yiqitkaan/Desktop/Taskora/taskora-backend
+cd Taskora/taskora-backend
 ```
 
 ### 2. Başlangıç verisini yedekleyin
@@ -255,7 +255,7 @@ Postman testlerinden sonra `npm start` çalışan terminalde aşağıdakine benz
 [2026-10-18 20:33:22] DELETE /tasks/4
 ```
 
-Bu ekran zorunlu beş Postman görüntüsüne ek kanıt olarak `07-logger-terminal.png` adıyla kaydedilebilir.
+Bu ekran ana Postman görüntülerine ek olarak `07-logger-terminal.png` adıyla kaydedilebilir.
 
 ## Test Sonunda Başlangıç Verisini Geri Yükleme
 
@@ -263,7 +263,7 @@ Bu ekran zorunlu beş Postman görüntüsüne ek kanıt olarak `07-logger-termin
 2. Aşağıdaki komutu çalıştırın:
 
 ```bash
-cd /Users/yiqitkaan/Desktop/Taskora/taskora-backend
+cd Taskora/taskora-backend
 cp /tmp/taskora-tasks-before-postman.json src/data/tasks.json
 ```
 
@@ -273,7 +273,7 @@ cp /tmp/taskora-tasks-before-postman.json src/data/tasks.json
 cat src/data/tasks.json
 ```
 
-## Son Teslim Kontrolü
+## Son Kontrol
 
 - [ ] Beş ekran görüntüsünün tamamı `screenshots/` klasöründe
 - [ ] Her görüntüde method ve URL okunuyor

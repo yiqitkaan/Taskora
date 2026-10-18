@@ -1,10 +1,8 @@
 # Taskora Backend
 
-Taskora Backend, yazılım ekiplerinin görevlerini oluşturup takip edebilmesi için Node.js ve Express.js ile geliştirilmiş bir REST API eğitim projesidir. Görevler bu sürümde `src/data/tasks.json` dosyasında saklanır; SQL Server entegrasyonu bu teslimin kapsamına dahil değildir.
+Taskora Backend, yazılım ekiplerinin görevlerini oluşturup takip edebilmesi için Node.js ve Express.js ile geliştirilmiş bir REST API'dir. Görevler bu sürümde `src/data/tasks.json` dosyasında saklanır.
 
 **Geliştirici:** Yiğit Kaan Bilir
-
-**Program:** Software Persona Yazılım / Kariyer Merkezi / 18. Dönem
 
 **Repository:** <https://github.com/yiqitkaan/Taskora>
 
@@ -37,12 +35,6 @@ Taskora Backend, yazılım ekiplerinin görevlerini oluşturup takip edebilmesi 
 ```bash
 git clone https://github.com/yiqitkaan/Taskora.git
 cd Taskora/taskora-backend
-```
-
-Proje zaten bilgisayarınızdaysa:
-
-```bash
-cd ~/Desktop/Taskora/taskora-backend
 ```
 
 ### 2. Bağımlılıkları kurun
@@ -199,7 +191,7 @@ Logger bütün API isteklerinde method, orijinal endpoint ve saniye hassasiyetin
 
 ## Postman Testi ve Ekran Görüntüleri
 
-Teslim için beş zorunlu CRUD isteği Postman üzerinde sırayla çalıştırılmalıdır. Ayrıntılı tıklama adımları, gövdeler, beklenen cevaplar, dosya isimleri ve veri geri yükleme işlemi [POSTMAN_TESTLERI.md](POSTMAN_TESTLERI.md) dosyasındadır.
+Beş temel CRUD isteği Postman üzerinde sırayla çalıştırılabilir. Ayrıntılı adımlar, örnek gövdeler, beklenen cevaplar, dosya isimleri ve veri geri yükleme işlemi [POSTMAN_TESTLERI.md](POSTMAN_TESTLERI.md) dosyasındadır.
 
 Hazır koleksiyon dosyası Postman'e aktarılabilir:
 
@@ -248,4 +240,4 @@ taskora-backend/
 
 ## Kapsam
 
-Bu eğitim sürümünde authentication, SQL Server bağlantısı, Docker ve production dağıtımı bulunmaz. Web ve Mobile modülleri kendi yerel veri katmanlarını kullanır; Backend API entegrasyonu sonraki geliştirme aşamasıdır.
+Bu sürümde authentication, SQL Server bağlantısı, Docker ve production dağıtımı bulunmaz. Web ve Mobile modülleri kendi yerel veri katmanlarını kullanır; Backend API entegrasyonu sonraki geliştirme aşamasıdır.

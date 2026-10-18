@@ -2,7 +2,7 @@
   "info": {
     "_postman_id": "c45e9673-62ca-4af4-8d3c-e245ed6e8d20",
     "name": "Taskora Backend CRUD Testleri",
-    "description": "Taskora Backend teslimi için sıralı CRUD istekleri. 01 numaralı istek yeni görev ID'sini taskId koleksiyon değişkenine kaydeder.",
+    "description": "Taskora Backend için sıralı CRUD istekleri. 01 numaralı istek yeni görev ID'sini taskId koleksiyon değişkenine kaydeder.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [

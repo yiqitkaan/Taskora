@@ -2,7 +2,7 @@
 
 ## Proje Hakkında
 
-Taskora Mobile, kullanıcı girişi sonrasında görevleri mobil ekranda listelemek ve detaylarını incelemek için hazırlanan Flutter eğitim projesidir. Başlangıç kullanıcıları ve görevler yerel JSON asset'lerinden okunur. Kayıtlar ve görev değişiklikleri Android'de SharedPreferences, iOS'ta UserDefaults içinde JSON olarak kalıcı saklanır; Taskora Backend entegrasyonu sonraki geliştirme aşamasıdır.
+Taskora Mobile, kullanıcıların görevlerini mobil ekranda oluşturması, izlemesi ve güncellemesi için Flutter ile geliştirilmiş bir görev yönetimi uygulamasıdır. Başlangıç kullanıcıları ve görevler yerel JSON asset'lerinden okunur. Kayıtlar ve görev değişiklikleri Android'de SharedPreferences, iOS'ta UserDefaults içinde JSON olarak kalıcı saklanır.
 
 ## Özellikler
 
@@ -44,7 +44,7 @@ E-posta: demo@taskora.app
 Şifre:   123456
 ```
 
-Bu bilgiler yalnızca eğitim demosu içindir. Parolalar eğitim kapsamı gereği yerel JSON içinde düz metin tutulur; gerçek hesap veya parola kullanılmamalıdır.
+Bu hesap yalnızca yerel demo akışını denemek içindir. Uygulama çevrim dışı çalıştığı için demo kullanıcı verileri yerel JSON içinde tutulur.
 
 ## Kurulum ve Çalıştırma
 
@@ -119,7 +119,7 @@ taskora-mobile/
 
 ## Ekran Görüntüleri
 
-`screenshots/` klasöründe aynı iOS Simulator üzerinden alınmış şu teslim kanıtları bulunur:
+`screenshots/` klasöründe iOS Simulator üzerinden alınmış şu uygulama ekranları bulunur:
 
 - `01-ana-sayfa.png`: kart tabanlı görev ana sayfası
 - `02-gorev-listesi.png`: dinamik görev liste görünümü
@@ -127,12 +127,12 @@ taskora-mobile/
 - `04-yeni-gorev.png`: doğrulamalı yeni görev formu
 - `05-giris-ekrani.png`: JSON tabanlı kullanıcı giriş ekranı
 
-## Yönerge Uyumu
+## Teknik Kapsam
 
-Taskora senaryosu, eğitimdeki mini katalog örneğinin teknik kazanımlarını görev yönetimine uyarlar. Model ve JSON dönüşümü, `ListView.builder`, `GridView.builder`, yerel asset, arama/filtreleme, Navigator, route arguments, detay ekranı ve state simülasyonu uygulamada bulunur. Taskora kullanımını tamamlamak için JSON tabanlı giriş, kayıt, çıkış, kalıcı yerel depolama ile form doğrulamalı görev ekleme ve düzenleme akışları da eklenmiştir. Kalıcılık üçüncü taraf paket olmadan Flutter `MethodChannel` üzerinden Android SharedPreferences ve iOS UserDefaults kullanılarak sağlanır.
+Uygulamada model ve JSON dönüşümü, `ListView.builder`, `GridView.builder`, yerel görseller, arama ve filtreleme, named route ile gezinme, route arguments, detay ekranı ve durum yönetimi birlikte kullanılır. JSON tabanlı giriş, kayıt, çıkış, kalıcı yerel depolama ile form doğrulamalı görev ekleme ve düzenleme akışları görev yönetimi deneyimini tamamlar. Kalıcılık, üçüncü taraf paket kullanılmadan Flutter `MethodChannel` üzerinden Android SharedPreferences ve iOS UserDefaults ile sağlanır.
 
-Hüseyin Adıgüzel'in yazılı yanıtında önceliğin teknik kıstasların sağlanması olduğu, senaryo uyarlamasının yapılabileceği ve iOS Simulator ile Android Emulator ekran görüntülerinin ikisinin de kabul edildiği belirtilmiştir. Ayrıntılı madde eşleştirmesi [MOBILE_GEREKSINIM_KONTROLU.md](MOBILE_GEREKSINIM_KONTROLU.md) dosyasındadır.
+Özelliklerin kaynak dosyaları ve doğrulama adımları [MOBILE_GEREKSINIM_KONTROLU.md](MOBILE_GEREKSINIM_KONTROLU.md) dosyasında listelenmiştir.
 
 ## Geliştirici
 
-Yiğit Kaan Bilir — Software Persona Yazılım / Kariyer Merkezi / 18. Dönem
+Yiğit Kaan Bilir

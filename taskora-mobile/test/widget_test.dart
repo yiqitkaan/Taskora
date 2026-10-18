@@ -109,7 +109,7 @@ void main() {
 
     await tester.tap(find.widgetWithText(ChoiceChip, 'Tamamlandı'));
     await tester.pump();
-    expect(find.text("Proje roadmap'ini hazırla"), findsOneWidget);
+    expect(find.text('Ürün yol haritasını hazırla'), findsOneWidget);
     expect(find.text('Mobil görev ekranını hazırla'), findsNothing);
 
     await tester.tap(find.widgetWithText(ChoiceChip, 'Tümü'));
