@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <title>Taskora Backend Proje Tanıtım Dokümanı</title>
+  <style>
+    @page { size: A4; margin: 16mm 16mm 17mm; }
+    * { box-sizing: border-box; }
+    body { margin: 0; color: #172033; font: 10.4pt/1.48 Arial, sans-serif; }
+    h1, h2, h3 { color: #173f73; margin: 0 0 9px; page-break-after: avoid; }
+    h1 { font-size: 30pt; line-height: 1.08; }
+    h2 { margin-top: 18px; padding-bottom: 5px; border-bottom: 2px solid #d7e4f2; font-size: 18pt; }
+    h3 { margin-top: 13px; font-size: 12.5pt; }
+    p { margin: 6px 0 10px; }
+    ul, ol { margin: 5px 0 10px 20px; padding: 0; }
+    li { margin: 3px 0; }
+    code { padding: 1px 4px; border-radius: 3px; background: #edf3f8; font: 9.2pt Menlo, monospace; }
+    pre { padding: 11px; border: 1px solid #ccd9e7; border-radius: 7px; background: #f6f9fc; white-space: pre-wrap; font: 8.5pt/1.45 Menlo, monospace; page-break-inside: avoid; }
+    table { width: 100%; border-collapse: collapse; margin: 9px 0 14px; font-size: 9.2pt; page-break-inside: avoid; }
+    th { background: #173f73; color: white; text-align: left; }
+    th, td { padding: 7px 8px; border: 1px solid #cbd7e4; vertical-align: top; }
+    tr:nth-child(even) td { background: #f6f9fc; }
+    .cover { min-height: 255mm; display: flex; flex-direction: column; justify-content: center; page-break-after: always; }
+    .eyebrow { color: #2e78b7; font-size: 12pt; font-weight: bold; letter-spacing: 1.5px; text-transform: uppercase; }
+    .subtitle { max-width: 155mm; margin: 16px 0 28px; color: #42526a; font-size: 16pt; line-height: 1.45; }
+    .identity { width: 100%; max-width: 150mm; border-left: 5px solid #2e78b7; padding: 10px 15px; background: #f2f7fb; }
+    .identity p { margin: 4px 0; }
+    .badge { display: inline-block; margin: 5px 5px 0 0; padding: 5px 9px; border-radius: 16px; background: #e4f0fb; color: #173f73; font-weight: bold; font-size: 9pt; }
+    .callout { margin: 12px 0; padding: 11px 13px; border-left: 4px solid #2e78b7; background: #f2f7fb; page-break-inside: avoid; }
+    .success { border-left-color: #17815b; background: #eef9f4; }
+    .diagram { margin: 11px 0; padding: 13px; border: 1px solid #cbd7e4; border-radius: 7px; background: #fbfcfe; text-align: center; font: bold 10pt/1.7 Menlo, monospace; white-space: pre; }
+    .page-break { page-break-before: always; }
+    .keep { page-break-inside: avoid; }
+    .small { color: #5e6c80; font-size: 8.8pt; }
+    .check { color: #147654; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <section class="cover">
+    <div class="eyebrow">Backend Geliştirme Bitirme Projesi</div>
+    <h1>TASKORA</h1>
+    <div class="subtitle">Görev ve Ekip Yönetim Sistemi<br>REST API Proje Tanıtım ve Teknik Uygulama Dokümanı</div>
+    <div>
+      <span class="badge">Node.js</span><span class="badge">Express.js</span><span class="badge">REST API</span>
+      <span class="badge">Routing</span><span class="badge">Middleware</span><span class="badge">CRUD</span><span class="badge">JSON</span>
+    </div>
+    <div class="identity" style="margin-top: 34px">
+      <p><strong>Katılımcı:</strong> Yiğit Kaan Bilir</p>
+      <p><strong>Program:</strong> Software Persona Yazılım / Kariyer Merkezi / 18. Dönem</p>
+      <p><strong>Eğitim:</strong> Node.js ile Backend Programlama</p>
+      <p><strong>Proje türü:</strong> REST API / Backend Geliştirme</p>
+      <p><strong>Repository:</strong> github.com/yiqitkaan/Taskora</p>
+      <p><strong>Sürüm ve tarih:</strong> 1.0.0 · 18 Ekim 2026</p>
+    </div>
+  </section>
+
+  <h2>1. Proje Tanıtımı</h2>
+  <p>Taskora, yazılım ekiplerinin görevlerini merkezi bir servis üzerinden oluşturması, çalışanlara ataması, durum ve öncelik bilgilerini takip etmesi için tasarlanmış bir görev yönetim platformudur. Bu doküman Taskora'nın Node.js ve Express.js ile geliştirilen backend modülünü kapsar.</p>
+  <p>Backend eğitim sürümü tamamen REST API mantığında çalışır. Veriler eğitim kapsamına uygun olarak yerel bir JSON dosyasında tutulur. Taskora Web, Taskora Database ve Taskora Mobile ayrı eğitim teslimleridir; bu sürümde backend ile doğrudan entegre değildir.</p>
+
+  <h3>1.1 Amaç</h3>
+  <p>Projenin amacı; Node.js çalışma ortamı, Express.js sunucusu, routing, middleware, CRUD işlemleri, HTTP durum kodları ve JSON veri yönetimi konularını gerçek hayata yakın tek bir senaryoda uygulamaktır.</p>
+
+  <h3>1.2 Problem ve çözüm</h3>
+  <p>Bir ekipte görevlerin kime atandığı, hangi aşamada olduğu ve hangi önceliğe sahip olduğu düzenli tutulmadığında iş takibi zorlaşır. Taskora Backend her görev için başlık, açıklama, durum, öncelik, sorumlu, proje ve zaman bilgilerini tek biçimde saklar ve istemcilere beş temel CRUD endpointi sunar.</p>
+
+  <h3>1.3 Proje kapsamı</h3>
+  <ul>
+    <li>Yeni görev oluşturma</li>
+    <li>Tüm görevleri listeleme ve isteğe bağlı filtreleme</li>
+    <li>ID ile görev detayı görüntüleme</li>
+    <li>Görevin seçilen alanlarını güncelleme</li>
+    <li>Görev silme</li>
+    <li>Tüm istekleri logger middleware ile terminale yazma</li>
+    <li>JSON dosyasına kalıcı kayıt ve açıklayıcı hata cevapları</li>
+  </ul>
+
+  <h2>2. Kullanılan Teknolojiler</h2>
+  <table>
+    <tr><th>Teknoloji</th><th>Projede kullanım amacı</th></tr>
+    <tr><td>Node.js 18+</td><td>JavaScript backend çalışma ortamı</td></tr>
+    <tr><td>Express.js 4.21.2</td><td>HTTP sunucusu, route ve middleware altyapısı</td></tr>
+    <tr><td>JavaScript / CommonJS</td><td>Controller, route ve uygulama mantığı</td></tr>
+    <tr><td>JSON</td><td>Görev verilerinin yerel ve kalıcı biçimde saklanması</td></tr>
+    <tr><td>Postman</td><td>CRUD endpointlerinin çalıştırılması ve teslim kanıtlarının alınması</td></tr>
+    <tr><td>Git / GitHub</td><td>Versiyon kontrolü ve public repository teslimi</td></tr>
+  </table>
+
+  <div class="page-break"></div>
+  <h2>3. Mimari ve İstek Akışı</h2>
+  <div class="diagram">HTTP İstemcisi / Postman
+        │
+        ▼
+Express Uygulaması (app.js)
+        │
+        ├──► Logger Middleware
+        │
+        ▼
+Task Router (/tasks)
+        │
+        ▼
+Task Controller
+        │
+        ▼
+src/data/tasks.json</div>
+
+  <p><code>app.js</code> Express uygulamasını kurar, logger ve JSON body middleware'lerini ekler, <code>/tasks</code> yolunu task router'a bağlar ve merkezi 404/500 hata cevaplarını tanımlar. Router HTTP methodunu ilgili controller fonksiyonuna yönlendirir. Controller veriyi okuyup doğrular, işlemi gerçekleştirir ve JSON cevap döndürür.</p>
+
+  <h3>3.1 Klasör yapısı</h3>
+  <pre>taskora-backend/
+├── docs/                         Proje tanıtım dokümanı
+├── postman/                      İçe aktarılabilir Postman koleksiyonu
+├── screenshots/                  Beş CRUD test ekranı
+├── src/
+│   ├── controllers/taskController.js
+│   ├── data/tasks.json
+│   ├── middleware/logger.js
+│   ├── routes/taskRoutes.js
+│   └── app.js
+├── package.json
+├── package-lock.json
+├── POSTMAN_TESTLERI.md
+└── README.md</pre>
+
+  <h2>4. Görev Veri Modeli</h2>
+  <table>
+    <tr><th>Alan</th><th>Tür</th><th>Kural</th></tr>
+    <tr><td>id</td><td>number</td><td>Sunucu üretir; pozitif ve benzersizdir</td></tr>
+    <tr><td>title</td><td>string</td><td>Zorunlu ve boş olmayan metin</td></tr>
+    <tr><td>description</td><td>string</td><td>İsteğe bağlı; varsayılan boş metin</td></tr>
+    <tr><td>status</td><td>string</td><td>Zorunlu: pending, in_progress veya completed</td></tr>
+    <tr><td>priority</td><td>string</td><td>Zorunlu: low, medium veya high</td></tr>
+    <tr><td>assignee</td><td>string</td><td>Zorunlu ve boş olmayan metin</td></tr>
+    <tr><td>projectId</td><td>number/null</td><td>İsteğe bağlı; gönderilirse pozitif tam sayı</td></tr>
+    <tr><td>createdAt</td><td>ISO 8601 string</td><td>Oluşturma sırasında sunucu yazar</td></tr>
+    <tr><td>updatedAt</td><td>ISO 8601 string</td><td>Oluşturma ve güncellemede sunucu yazar</td></tr>
+  </table>
+
+  <pre>{
+  "id": 1,
+  "title": "Görev API'sini hazırlama",
+  "description": "Görev listeleme ve detay endpointleri hazırlanacak.",
+  "status": "completed",
+  "priority": "high",
+  "assignee": "Yiğit Kaan Bilir",
+  "projectId": 1,
+  "createdAt": "2026-09-19T10:00:00.000Z",
+  "updatedAt": "2026-09-19T10:00:00.000Z"
+}</pre>
+
+  <div class="page-break"></div>
+  <h2>5. REST API Tasarımı</h2>
+  <table>
+    <tr><th>Method</th><th>Endpoint</th><th>Başarı</th><th>İşlem</th></tr>
+    <tr><td>POST</td><td>/tasks</td><td>201</td><td>Yeni görev oluşturur</td></tr>
+    <tr><td>GET</td><td>/tasks</td><td>200</td><td>Tüm görevleri listeler</td></tr>
+    <tr><td>GET</td><td>/tasks/:id</td><td>200</td><td>Belirli görevi getirir</td></tr>
+    <tr><td>PUT</td><td>/tasks/:id</td><td>200</td><td>Gönderilen görev alanlarını günceller</td></tr>
+    <tr><td>DELETE</td><td>/tasks/:id</td><td>200</td><td>Görevi siler</td></tr>
+  </table>
+
+  <h3>5.1 POST /tasks</h3>
+  <p><code>title</code>, <code>status</code>, <code>priority</code> ve <code>assignee</code> alanları zorunludur. Başarılı işlem yeni görevi, sunucunun ürettiği ID ve zaman alanlarıyla birlikte döndürür.</p>
+  <pre>POST /tasks
+Content-Type: application/json
+
+{
+  "title": "Postman API testi",
+  "description": "CRUD isteklerini kontrol et",
+  "status": "pending",
+  "priority": "high",
+  "assignee": "Yiğit Kaan Bilir",
+  "projectId": 1
+}</pre>
+
+  <h3>5.2 GET /tasks ve filtreleme</h3>
+  <p>Temel istek bütün görevleri JSON dizisi olarak döndürür. İsteğe bağlı ileri seviye özellik olarak durum ve öncelik filtreleri birlikte veya ayrı kullanılabilir.</p>
+  <pre>GET /tasks
+GET /tasks?status=completed
+GET /tasks?priority=high
+GET /tasks?status=in_progress&amp;priority=medium</pre>
+
+  <h3>5.3 GET /tasks/:id</h3>
+  <p>Pozitif tam sayı biçimindeki ID ile tek görev döndürülür. Geçersiz ID biçimi <code>400</code>, bulunmayan görev <code>404</code> üretir.</p>
+
+  <div class="keep">
+    <h3>5.4 PUT /tasks/:id</h3>
+    <p>İstemci yalnızca değiştirmek istediği alanları gönderir. <code>id</code>, <code>createdAt</code> ve <code>updatedAt</code> istemci tarafından değiştirilemez. Başarılı güncellemede <code>updatedAt</code> yenilenir.</p>
+    <pre>{
+  "status": "in_progress",
+  "priority": "medium"
+}</pre>
+  </div>
+
+  <div class="keep">
+    <h3>5.5 DELETE /tasks/:id</h3>
+    <p>Görev JSON dizisinden çıkarılır ve veri dosyası güncellenir.</p>
+    <pre>{ "message": "Görev başarıyla silindi." }</pre>
+  </div>
+
+  <h2>6. Middleware ve Hata Yönetimi</h2>
+  <h3>6.1 Logger middleware</h3>
+  <p><code>src/middleware/logger.js</code> bütün isteklerden önce çalışır. ISO zaman bilgisini okunabilir biçime getirerek method ve orijinal URL ile terminale yazar.</p>
+  <pre>[2026-10-18 20:33:18] POST /tasks
+[2026-10-18 20:33:19] GET /tasks
+[2026-10-18 20:33:20] PUT /tasks/4</pre>
+
+  <h3>6.2 Doğrulamalar</h3>
+  <ul>
+    <li>İstek gövdesi JSON nesnesi olmalıdır.</li>
+    <li>Oluşturmada zorunlu alanlar bulunmalıdır.</li>
+    <li>Başlık ve sorumlu boş metin olamaz.</li>
+    <li>Durum ve öncelik yalnızca tanımlı değerlerden biri olabilir.</li>
+    <li>projectId gönderilirse pozitif tam sayı olmalıdır.</li>
+    <li>Güncellemede en az bir düzenlenebilir alan bulunmalıdır.</li>
+    <li>Tanımlanmayan veya sunucuya ait alanlar değiştirilemez.</li>
+  </ul>
+
+  <h3>6.3 HTTP durum kodları</h3>
+  <table>
+    <tr><th>Kod</th><th>Kullanım</th><th>Örnek cevap</th></tr>
+    <tr><td>200 OK</td><td>Listeleme, detay, güncelleme ve silme başarılı</td><td>Görev veya başarı mesajı</td></tr>
+    <tr><td>201 Created</td><td>Görev oluşturma başarılı</td><td>Oluşturulan görev</td></tr>
+    <tr><td>400 Bad Request</td><td>Geçersiz ID, alan veya JSON gövdesi</td><td>{ "error": "..." }</td></tr>
+    <tr><td>404 Not Found</td><td>Görev ya da endpoint bulunamadı</td><td>{ "error": "Görev bulunamadı." }</td></tr>
+    <tr><td>500 Internal Server Error</td><td>Beklenmeyen dosya/sunucu hatası</td><td>{ "error": "Sunucu hatası." }</td></tr>
+  </table>
+
+  <h2>7. JSON Veri Yönetimi</h2>
+  <p>Controller her işlemde <code>src/data/tasks.json</code> dosyasını UTF-8 olarak okur ve içeriğin dizi olduğunu doğrular. Yazma işlemi önce süreç ID'sini içeren geçici bir dosyaya yapılır, ardından dosya yeniden adlandırılarak asıl veri dosyasının yerini alır. Böylece yarım yazılmış JSON bırakma riski azaltılır.</p>
+  <p>Yeni ID, mevcut en yüksek ID'nin bir fazlasıdır. Oluşturma, güncelleme ve silme işlemleri dosyaya yazıldığı için sunucu kapatılıp açıldığında görev değişiklikleri korunur.</p>
+  <div class="callout">Bu teslimde veritabanı veya authentication bulunmaz. JSON dosyası eğitim kapsamındaki veri yönetimi gereksinimini karşılar. TaskoraDB entegrasyonu sonraki geliştirme aşamasıdır.</div>
+
+  <div class="page-break"></div>
+  <h2>8. Test Planı ve Doğrulama</h2>
+  <h3>8.1 Zorunlu Postman akışı</h3>
+  <ol>
+    <li><strong>POST /tasks:</strong> Görev oluşturulur; <code>201 Created</code>.</li>
+    <li><strong>GET /tasks:</strong> Yeni kayıt listede görülür; <code>200 OK</code>.</li>
+    <li><strong>GET /tasks/:id:</strong> Doğru görev döner; <code>200 OK</code>.</li>
+    <li><strong>PUT /tasks/:id:</strong> Durum ve öncelik değişir; <code>200 OK</code>.</li>
+    <li><strong>DELETE /tasks/:id:</strong> Görev silinir; <code>200 OK</code>.</li>
+  </ol>
+  <p>Hazır Postman koleksiyonu ilk cevaptaki ID'yi koleksiyon değişkenine kaydeder. Böylece detay, güncelleme ve silme istekleri aynı kaydı kullanır. Her zorunlu istekte method, URL, HTTP status ve response JSON görünür şekilde ekran görüntüsü alınır.</p>
+
+  <h3>8.2 Gerçek çalışma doğrulaması</h3>
+  <p>18 Ekim 2026 tarihinde temiz bir geçici görevle uçtan uca HTTP testi uygulanmış ve başlangıç JSON'u test sonunda geri yüklenmiştir.</p>
+  <table>
+    <tr><th>Kontrol</th><th>Beklenen</th><th>Sonuç</th></tr>
+    <tr><td>Görev oluşturma</td><td>201 ve yeni görev</td><td class="check">BAŞARILI</td></tr>
+    <tr><td>Listeleme / detay / filtre</td><td>200 ve doğru veri</td><td class="check">BAŞARILI</td></tr>
+    <tr><td>Güncelleme</td><td>200 ve güncel alanlar</td><td class="check">BAŞARILI</td></tr>
+    <tr><td>Silme</td><td>200 ve başarı mesajı</td><td class="check">BAŞARILI</td></tr>
+    <tr><td>Silme sonrası detay</td><td>404</td><td class="check">BAŞARILI</td></tr>
+    <tr><td>Eksik alan / bozuk JSON</td><td>400</td><td class="check">BAŞARILI</td></tr>
+    <tr><td>Logger</td><td>Method, URL ve zaman</td><td class="check">BAŞARILI</td></tr>
+    <tr><td>npm güvenlik denetimi</td><td>0 açık</td><td class="check">BAŞARILI</td></tr>
+  </table>
+
+  <h2>9. Kurulum Özeti</h2>
+  <pre>git clone https://github.com/yiqitkaan/Taskora.git
+cd Taskora/taskora-backend
+npm ci
+npm start</pre>
+  <p>Varsayılan adres <code>http://localhost:3000</code>'dir. Alternatif port için <code>PORT=4000 npm start</code> kullanılabilir.</p>
+
+  <div class="page-break"></div>
+  <h2>10. Resmî Gereksinim Uyumu</h2>
+  <table>
+    <tr><th>Resmî kıstas</th><th>Taskora karşılığı</th><th>Durum</th></tr>
+    <tr><td>Node.js projesi ve Express.js</td><td>package.json ve Express 4 uygulaması</td><td class="check">Tamamlandı</td></tr>
+    <tr><td>Klasör ve routing yapısı</td><td>controllers, routes, middleware, data</td><td class="check">Tamamlandı</td></tr>
+    <tr><td>Görev ekleme</td><td>POST /tasks</td><td class="check">Tamamlandı</td></tr>
+    <tr><td>Görev listeleme</td><td>GET /tasks</td><td class="check">Tamamlandı</td></tr>
+    <tr><td>Görev detayı</td><td>GET /tasks/:id</td><td class="check">Tamamlandı</td></tr>
+    <tr><td>Görev güncelleme</td><td>PUT /tasks/:id</td><td class="check">Tamamlandı</td></tr>
+    <tr><td>Görev silme</td><td>DELETE /tasks/:id</td><td class="check">Tamamlandı</td></tr>
+    <tr><td>Temel logger middleware</td><td>Method, endpoint ve zaman damgası</td><td class="check">Tamamlandı</td></tr>
+    <tr><td>JSON veri yönetimi</td><td>tasks.json okuma ve atomik yazma</td><td class="check">Tamamlandı</td></tr>
+    <tr><td>README kurulum notu</td><td>Ayrıntılı kurulum, endpoint ve test rehberi</td><td class="check">Tamamlandı</td></tr>
+    <tr><td>Proje tanıtım dokümanı</td><td>Bu PDF ve düzenlenebilir HTML kaynağı</td><td class="check">Tamamlandı</td></tr>
+    <tr><td>Postman temel CRUD testi</td><td>Koleksiyon ve adım adım test rehberi</td><td class="check">Hazır</td></tr>
+    <tr><td>Postman ekran görüntüleri</td><td>screenshots klasöründe beş gerçek çıktı</td><td>Ayrı teslim kanıtları</td></tr>
+    <tr><td>Public GitHub repository</td><td>github.com/yiqitkaan/Taskora</td><td class="check">Tamamlandı</td></tr>
+  </table>
+
+  <h2>11. İsteğe Bağlı Özellikler</h2>
+  <p>Resmî yönergede teslim dışı pratik olarak belirtilen durum ve öncelik filtreleri uygulanmıştır. Görev alanlarının doğrulanması ve açıklayıcı 400 cevapları da controller seviyesinde eklenmiştir. Arama, assignee filtresi, sayfalama, sıralama ve raporlama endpointleri mevcut eğitim teslimine dahil edilmemiştir.</p>
+
+  <h2>12. Sonuç</h2>
+  <p>Taskora Backend; çalışan REST API, eksiksiz görev CRUD operasyonları, ayrık routing/controller yapısı, logger middleware ve JSON veri yönetimiyle backend eğitiminin teknik hedeflerini karşılar. Kurulum README'si, proje tanıtım dokümanı, Postman koleksiyonu ve ekran görüntüsü rehberiyle teslim süreci tekrarlanabilir hale getirilmiştir.</p>
+
+  <div class="callout success"><strong>Teslim özeti:</strong> Kaynak kod + package.json/package-lock.json + README + proje tanıtım PDF'i + beş gerçek Postman ekran görüntüsü + public GitHub repository.</div>
+  <p class="small">Hazırlayan: Yiğit Kaan Bilir · Software Persona Yazılım / Kariyer Merkezi / 18. Dönem · 2026</p>
+</body>
+</html>
