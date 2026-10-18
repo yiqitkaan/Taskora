@@ -119,13 +119,13 @@ taskora-mobile/
 
 ## Ekran Görüntüleri
 
-`screenshots/` klasöründe şu teslim kanıtları bulunur:
+`screenshots/` klasöründe aynı iOS Simulator üzerinden alınmış şu teslim kanıtları bulunur:
 
-- `login.png`: güncel iPhone Simulator giriş ekranı
-- `task-grid.png`: iPhone Simulator kart görünümü
-- `task-list.png`: iPhone Simulator liste görünümü
-- `task-detail.png`: görev detay ekranı
-- `status-updated.png`: state güncellemesinin listeye yansıması
+- `01-ana-sayfa.png`: kart tabanlı görev ana sayfası
+- `02-gorev-listesi.png`: dinamik görev liste görünümü
+- `03-gorev-detayi.png`: yerel görselli görev detay ekranı
+- `04-yeni-gorev.png`: doğrulamalı yeni görev formu
+- `05-giris-ekrani.png`: JSON tabanlı kullanıcı giriş ekranı
 
 ## Yönerge Uyumu
 
