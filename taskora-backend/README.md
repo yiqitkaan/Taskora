@@ -42,7 +42,7 @@ cd Taskora/taskora-backend
 Proje zaten bilgisayarınızdaysa:
 
 ```bash
-cd /Users/yiqitkaan/Desktop/Taskora/taskora-backend
+cd ~/Desktop/Taskora/taskora-backend
 ```
 
 ### 2. Bağımlılıkları kurun
