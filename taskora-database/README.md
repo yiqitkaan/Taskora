@@ -1,68 +1,52 @@
-# NovaStore Database
+# Taskora Database
 
-NovaStore, Microsoft SQL Server ve T-SQL ile hazırlanmış ilişkisel bir e-ticaret veritabanı projesidir. Veritabanı adı `NovaStoreDB`'dir.
+## Proje Hakkında
 
-## Teslim dosyaları
+Taskora'nın görev ve ekip yönetimi için hazırlanmış ilişkisel veri katmanıdır. **Microsoft SQL Server / T-SQL** kullanır. Veritabanı adı **TaskoraDB**'dir. Mevcut Taskora Backend yerel JSON dosyası, Taskora Web ise LocalStorage kullanır. Backend'in SQL Server'a bağlanması sonraki geliştirme aşamasıdır.
 
-| Dosya | İçerik |
+## Tablolar
+
+| Tablo | Amaç |
 | --- | --- |
-| [YigitKaanBilir_NovaStore_Proje.sql](YigitKaanBilir_NovaStore_Proje.sql) | Veritabanı, tablolar, örnek veriler, altı analiz sorgusu, VIEW ve BACKUP komutu |
-| [YigitKaanBilir_NovaStore_Proje.docx](YigitKaanBilir_NovaStore_Proje.docx) | Kod açıklamaları, gerçek sorgu sonuçları, ilişki şeması ve tam SQL eki |
-| [YigitKaanBilir_NovaStore_Proje.png](YigitKaanBilir_NovaStore_Proje.png) | Beş tablonun Primary Key ve Foreign Key ilişkilerini gösteren şema |
+| `Users` | Kullanıcı adı, benzersiz e-posta ve rol |
+| `Projects` | Proje bilgileri, başlangıç tarihi ve durum |
+| `Tasks` | Görev, öncelik, durum, teslim tarihi, proje ve sorumlu |
+| `TaskComments` | Görev yorumları ve yorum yazarı |
+| `ProjectMembers` | Proje üyelikleri; aynı kullanıcı bir projeye bir kez eklenebilir |
 
-Form tesliminde bu üç dosya ayrı alanlara yüklenir. `screenshots/` klasörü raporda kullanılan gerçek sonuç görsellerini içerir.
+## Tablo İlişkileri
 
-## Veri modeli
+```text
+Users    1 --- N Tasks          (AssigneeID)
+Projects 1 --- N Tasks          (ProjectID)
+Tasks    1 --- N TaskComments   (TaskID)
+Users    1 --- N TaskComments   (UserID)
+Users    N --- N Projects       (ProjectMembers üzerinden)
+```
 
-| Tablo | Amaç | Temel ilişki |
-| --- | --- | --- |
-| `Categories` | Ürün kategorileri | Bir kategori, birden fazla ürüne sahiptir |
-| `Products` | Ürün, fiyat ve stok bilgileri | Her ürün bir kategoriye bağlıdır |
-| `Customers` | Müşteri, şehir ve benzersiz e-posta bilgileri | Bir müşteri, birden fazla sipariş verebilir |
-| `Orders` | Sipariş tarihi ve toplam tutar | Her sipariş bir müşteriye bağlıdır |
-| `OrderDetails` | Siparişteki ürün ve miktar | Siparişler ile ürünler arasındaki ara tablodur |
+`ProjectMembers` tablosunda `ProjectID` ve `UserID` birlikte benzersizdir. Örnek veride 6 kullanıcı, 5 proje, 12 görev, 10 yorum ve 13 proje üyeliği vardır. Son proje görevsiz, son kullanıcı ise üzerine görev atanmamış şekilde bırakılmıştır; böylece `LEFT JOIN` sonuçlarında sıfır sayıları görülebilir.
 
-Örnek veri setinde 5 kategori, 12 ürün, 6 müşteri, 10 sipariş ve 22 sipariş detayı bulunur.
+## SQL Dosyasını Çalıştırma
 
-## İçerik
+1. Bir Microsoft SQL Server örneğine SQL Server Management Studio (SSMS) ile bağlanın. Yeni veritabanı oluşturma izni gereklidir.
+2. [YigitKaanBilir_Taskora_Proje.sql](YigitKaanBilir_Taskora_Proje.sql) dosyasını UTF-8 olarak açın. **TaskoraDB zaten varsa** dosyayı tekrar çalıştırmayın; script yeni veritabanı için tek seferliktir.
+3. `C:\Yedek` klasörünü **SQL Server'ın çalıştığı makinede** oluşturun ve SQL Server servis hesabına yazma izni verin. Bu mümkün değilse önce 1–6. bölümleri çalıştırın; 7. bölümdeki backup komutunu uygun ortamda ayrıca çalıştırın.
+4. Tüm scripti çalıştırın. `GO` batch ayırıcıları özellikle `CREATE DATABASE` ve `CREATE VIEW` için gereklidir.
+5. Object Explorer'da `TaskoraDB` altındaki tabloları ve `dbo.vw_TaskoraGorevOzet` görünümünü kontrol edin. Sorgu sonuçlarını gerçek SQL Server ekranından alın.
 
-SQL dosyası aşağıdaki işlemleri tek akışta gerçekleştirir:
+SQL dosyası Türkçe metinleri `N'...'` Unicode literal olarak ekler ve `VARCHAR` alanlarının Türkçe karakterleri koruması için `Turkish_100_CI_AS` harmanlamasıyla veritabanını oluşturur.
 
-1. `NovaStoreDB` veritabanını oluşturur.
-2. Beş tabloyu Primary Key, Foreign Key, UNIQUE, CHECK ve DEFAULT kısıtlarıyla kurar.
-3. İlişkili örnek kayıtları ekler ve sipariş toplamlarını ürün fiyatlarından hesaplar.
-4. Altı zorunlu analiz sorgusunu çalıştırır:
-   - Stoku 20'nin altında olan ürünler
-   - Müşteri ve sipariş birleştirmesi
-   - Ahmet Yılmaz için çoklu JOIN raporu
-   - Kategori bazında ürün sayısı
-   - Müşteri bazında toplam ciro
-   - Siparişlerin üzerinden geçen gün sayısı
-5. `dbo.vw_SiparisOzet` görünümünü oluşturur ve sorgular.
-6. `NovaStoreDB` için tam yedek alır.
+## Sorgular ve VIEW
 
-## SQL Server üzerinde çalıştırma
+Dosyada altı temel analiz sorgusu bulunur: tamamlanmamış yüksek öncelikli görevler; görev–proje–kullanıcı JOIN'i; Yiğit Kaan Bilir'e atanan görevler; proje başına görev sayısı; kullanıcı başına toplam ve tamamlanan görev sayısı; görevlerin oluşturulmasından geçen günler. Ek subquery, ortalama görev sayısından fazla görevi olan kullanıcıları listeler.
 
-1. SQL Server Management Studio ile yeni veritabanı oluşturma yetkisi bulunan bir sunucuya bağlanın.
-2. SQL Server'ın çalıştığı Windows makinede `C:\Yedek` klasörünü oluşturun.
-3. SQL Server servis hesabına bu klasör için yazma izni verin.
-4. [SQL dosyasını](YigitKaanBilir_NovaStore_Proje.sql) SSMS içinde UTF-8 olarak açın.
-5. Dosyanın tamamını çalıştırın.
-6. Object Explorer içinde `NovaStoreDB`, beş tablo ve `dbo.vw_SiparisOzet` görünümünü kontrol edin.
-7. `C:\Yedek\NovaStoreDB.bak` dosyasının oluştuğunu doğrulayın.
+`dbo.vw_TaskoraGorevOzet` görünümü görev adı, proje, sorumlu, durum, öncelik ve tarihleri tek sorguda sunar. Oluşturulduktan sonra `SELECT * FROM dbo.vw_TaskoraGorevOzet;` ile okunur.
 
-Aynı isimde `NovaStoreDB` zaten varsa scripti çalıştırmadan önce mevcut veritabanını koruyup korumayacağınıza karar verin. Dosya yeni bir kurulum için hazırlanmıştır.
+## Backup ve Doğrulama
 
-## Doğrulama
+Son bölüm `TaskoraDB` veritabanını `C:\Yedek\TaskoraDB.bak` konumuna yedekleyen `BACKUP DATABASE` komutudur. Bu yol SQL Server makinesine aittir; klasör ve yazma izni yoksa komut hata verir.
 
-Proje Microsoft SQL Server 2022 üzerinde sıfırdan çalıştırılmıştır. Doğrulanan sonuçlar:
-
-- 5 tablo ve 4 Foreign Key
-- 5 kategori, 12 ürün, 6 müşteri, 10 sipariş, 22 sipariş detayı
-- Altı sorguda geçerli sonuç kümesi
-- `dbo.vw_SiparisOzet` görünümü
-- Başarılı `BACKUP DATABASE`
-- Başarılı `RESTORE VERIFYONLY`
+SQL dosyası Microsoft SQL Server 2022 üzerinde temiz bir veritabanında baştan sona çalıştırılmıştır. 6 kullanıcı, 5 proje, 12 görev, 10 yorum, 13 proje üyeliği, 6 Foreign Key ve `dbo.vw_TaskoraGorevOzet` görünümü doğrulanmıştır. Oluşturulan yedek `RESTORE VERIFYONLY` komutuyla geçerli bulunmuştur.
 
 ## Geliştirici
 
