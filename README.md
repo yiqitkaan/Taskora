@@ -1,35 +1,112 @@
 # Taskora
 
-Taskora; görev ve ekip yönetimi için backend, web, veritabanı ve mobil bileşenlerini tek depoda birleştiren bir yazılım projesidir.
+Taskora, görev ve ekip yönetimi senaryosunu Backend, Web, SQL ve Mobile geliştirme alanlarında ele alan çok modüllü bir eğitim projesidir.
+
+Proje, **Software Persona Yazılım / Kariyer Merkezi 18. Dönem** programı kapsamında her alanın teknik kazanımlarını aynı ürün fikri üzerinde göstermek amacıyla geliştirilmiştir.
 
 **Geliştirici:** Yiğit Kaan Bilir
 
-**Repository:** <https://github.com/yiqitkaan/Taskora>
+**Canlı web uygulaması:** <https://idyllic-belekoy-ce4466.netlify.app>
+
+**GitHub:** <https://github.com/yiqitkaan/Taskora>
+
+## Projenin Amacı
+
+Taskora; görev oluşturma, güncelleme, filtreleme, durum takibi ve ekip çalışması gibi temel işlevleri farklı platformlarda uygulayan bir görev yönetimi sistemidir. Depodaki dört modül ortak alan modelini kullanır ve kendi eğitim kapsamına uygun biçimde bağımsız çalışır.
+
+Bu yapı sayesinde aynı ürün senaryosu üzerinde REST API geliştirme, React arayüz tasarımı, ilişkisel veri modelleme ve Flutter mobil geliştirme çalışmaları birlikte görülebilir.
 
 ## Modüller
 
-| Sıra | Modül | Teknolojiler | Veri kaynağı | Öne çıkan özellikler |
-| --- | --- | --- | --- | --- |
-| 1 | Backend | Node.js, Express.js, JavaScript, REST API | Yerel JSON | CRUD, routing, logger ve istek doğrulama |
-| 2 | Web | React, JavaScript, Vite, Tailwind CSS | LocalStorage | CRUD, arama, filtreleme ve kalıcılık çalışıyor |
-| 3 | Database / SQL | Microsoft SQL Server, T-SQL | TaskoraDB | İlişkisel görev, proje, ekip ve yorum veri modeli |
-| 4 | Mobile | Flutter, Dart, Material Design | Cihazda kalıcı yerel JSON | Giriş, kayıt ve çevrim dışı görev yönetimi |
+| Modül | Teknolojiler | Veri kaynağı | Kapsam |
+| --- | --- | --- | --- |
+| [Backend](taskora-backend/) | Node.js, Express.js, JavaScript | JSON dosyası | REST API, CRUD, doğrulama, middleware ve hata yönetimi |
+| [Web](taskora-web/) | React, Vite, Tailwind CSS | LocalStorage | Görev paneli, arama, filtreleme, istatistik ve CRUD |
+| [Database](taskora-database/) | Microsoft SQL Server, T-SQL | TaskoraDB | İlişkisel şema, analiz sorguları, VIEW ve BACKUP |
+| [Mobile](taskora-mobile/) | Flutter, Dart, Material Design | Cihazda kalıcı yerel JSON | Giriş, kayıt, görev yönetimi ve çevrim dışı kullanım |
 
-## 1. Taskora Backend
+## Uygulama Görselleri
 
-[`taskora-backend/`](taskora-backend/) altında Node.js ve Express.js ile geliştirilen görev yönetimi REST API'si bulunur.
+### Web
 
-### Özellikler
+<p align="center">
+  <img src="taskora-web/screenshots/dashboard.png" alt="Taskora web görev paneli" width="88%">
+</p>
 
-- Görev oluşturma, listeleme, detay görüntüleme, güncelleme ve silme
-- Controller ve router katmanlarının ayrılması
-- Method, endpoint ve zaman damgası yazan logger middleware
-- JSON dosyasında kalıcı görev verisi
+<p align="center">
+  <img src="taskora-web/screenshots/yeni-gorev.png" alt="Taskora web yeni görev formu" width="44%">
+  <img src="taskora-web/screenshots/gorev-duzenle.png" alt="Taskora web görev düzenleme formu" width="44%">
+</p>
+
+### Mobile
+
+<p align="center">
+  <img src="taskora-mobile/screenshots/04-giris-ekrani.png" alt="Taskora mobil giriş ekranı" width="22%">
+  <img src="taskora-mobile/screenshots/01-ana-sayfa.png" alt="Taskora mobil ana sayfa" width="22%">
+  <img src="taskora-mobile/screenshots/02-gorev-listesi.png" alt="Taskora mobil görev listesi" width="22%">
+  <img src="taskora-mobile/screenshots/03-gorev-detayi.png" alt="Taskora mobil görev detayı" width="22%">
+</p>
+
+### Backend API
+
+<p align="center">
+  <img src="taskora-backend/screenshots/02-get-tasks.png" alt="Taskora REST API görev listesi Postman sonucu" width="88%">
+</p>
+
+## Mimari
+
+```mermaid
+flowchart LR
+    B["Backend<br/>Node.js + Express"] --> BJ[("tasks.json")]
+    W["Web<br/>React + Vite"] --> WL[("LocalStorage")]
+    M["Mobile<br/>Flutter"] --> MS[("SharedPreferences / UserDefaults")]
+    D["Database<br/>SQL Server"] --> DB[("TaskoraDB")]
+```
+
+Backend, Web ve Mobile mevcut sürümde kendi yerel veri kaynaklarıyla çalışır. TaskoraDB, ürünün ilişkisel veri modeli ve SQL raporlama katmanını gösterir. Modüllerin tek API ve merkezi veritabanı üzerinden birleştirilmesi sonraki geliştirme adımıdır.
+
+## Öne Çıkan Özellikler
+
+### Backend
+
+- REST yaklaşımıyla görev oluşturma, listeleme, detay görüntüleme, güncelleme ve silme
+- Controller, router ve middleware katmanlarının ayrılması
 - Durum ve öncelik filtreleri
-- Zorunlu alan, enum, ID ve bozuk JSON kontrolleri
-- Açıklayıcı `400`, `404` ve `500` hata cevapları
+- Zorunlu alan, enum, ID ve bozuk JSON doğrulamaları
+- Açıklayıcı `400`, `404` ve `500` yanıtları
+- Paylaşılabilir Postman koleksiyonu ve test görselleri
 
-### Çalıştırma
+### Web
+
+- Görev ekleme, düzenleme, silme ve listeleme
+- Başlık ve açıklamada arama
+- Durum ve öncelik filtreleri
+- Görev durumlarına göre canlı istatistik kartları
+- LocalStorage ile tarayıcıda kalıcılık
+- Responsive arayüz ve Netlify dağıtımı
+
+### Database
+
+- Users, Projects, Tasks, TaskComments ve ProjectMembers tabloları
+- Primary Key, Foreign Key, UNIQUE, CHECK ve DEFAULT kısıtları
+- JOIN, LEFT JOIN, GROUP BY, COUNT, subquery ve DATEDIFF analizleri
+- `dbo.vw_TaskoraGorevOzet` görünümü
+- `BACKUP DATABASE` ve gerçek SQL Server doğrulaması
+
+### Mobile
+
+- Yerel demo giriş, kullanıcı kaydı ve çıkış
+- Görev ekleme, düzenleme, arama, filtreleme ve durum güncelleme
+- Görev kartları, detay ekranı ve yerel görsel varlıklar
+- Model sınıflarında `fromJson` ve `toJson`
+- Android SharedPreferences ve iOS UserDefaults üzerinde JSON kalıcılığı
+- Android ve iOS desteği
+
+## Hızlı Başlangıç
+
+### Backend
+
+Gereksinim: Node.js 18 veya üzeri.
 
 ```bash
 cd taskora-backend
@@ -37,32 +114,17 @@ npm ci
 npm start
 ```
 
-API varsayılan olarak `http://localhost:3000` adresinde çalışır.
+API varsayılan olarak <http://localhost:3000> adresinde çalışır.
 
 | Method | Endpoint | İşlem |
 | --- | --- | --- |
 | `POST` | `/tasks` | Yeni görev oluşturur |
-| `GET` | `/tasks` | Bütün görevleri listeler |
-| `GET` | `/tasks/:id` | Belirli görevi getirir |
-| `PUT` | `/tasks/:id` | Görevin gönderilen alanlarını günceller |
+| `GET` | `/tasks` | Görevleri listeler |
+| `GET` | `/tasks/:id` | Görev detayını getirir |
+| `PUT` | `/tasks/:id` | Görevi günceller |
 | `DELETE` | `/tasks/:id` | Görevi siler |
 
-Ayrıntılı kurulum, istek örnekleri ve hata cevapları için [Backend README](taskora-backend/README.md), ekran görüntüsü akışı için [Postman Test Rehberi](taskora-backend/POSTMAN_TESTLERI.md) kullanılmalıdır.
-
-## 2. Taskora Web
-
-[`taskora-web/`](taskora-web/) altında React ve Vite ile geliştirilen tarayıcı tabanlı görev yönetimi arayüzü bulunur.
-
-### Özellikler
-
-- Görev ekleme, listeleme, düzenleme ve silme
-- Durum ve öncelik filtreleri
-- Başlık ve açıklamada arama
-- Görev durumlarına göre canlı istatistikler
-- LocalStorage ile tarayıcıda kalıcı kayıt
-- Netlify dağıtım yapılandırması
-
-### Çalıştırma
+### Web
 
 ```bash
 cd taskora-web
@@ -77,38 +139,9 @@ npm run build
 npm run preview
 ```
 
-Ayrıntılar için [Web README](taskora-web/README.md) dosyasına bakın.
+### Mobile
 
-## 3. Taskora Database / SQL
-
-[`taskora-database/`](taskora-database/) altında Microsoft SQL Server ve T-SQL ile geliştirilen TaskoraDB veri katmanı bulunur.
-
-### Özellikler
-
-- Users, Projects, Tasks, TaskComments ve ProjectMembers tabloları
-- Primary Key, Foreign Key, UNIQUE, CHECK ve DEFAULT kısıtları
-- 6 kullanıcı, 5 proje, 12 görev, 10 yorum ve 13 proje üyeliği
-- WHERE, ORDER BY, JOIN, GROUP BY, COUNT, subquery, DATEDIFF ve GETDATE analizleri
-- `dbo.vw_TaskoraGorevOzet` görünümü
-- Tam veritabanı yedekleme komutu
-
-Teslim dosyaları ve çalıştırma adımları için [Database README](taskora-database/README.md) dosyasına bakın.
-
-## 4. Taskora Mobile
-
-[`taskora-mobile/`](taskora-mobile/) altında Flutter ve Dart ile geliştirilen mobil görev yönetimi uygulaması bulunur.
-
-### Özellikler
-
-- JSON tabanlı demo giriş, yeni kullanıcı kaydı ve çıkış
-- Görevler için kart ve liste görünümü
-- Görev ekleme, düzenleme, arama, filtreleme ve durum güncelleme
-- Görev detaylarında yerel görsel asset'leri
-- Android SharedPreferences ve iOS UserDefaults içinde JSON kalıcılığı
-- Model sınıflarında `fromJson` ve `toJson`
-- Navigator ve route arguments ile ekranlar arası veri aktarımı
-
-### Çalıştırma
+Gereksinim: Flutter SDK ve çalışır durumda bir Android Emulator veya iOS Simulator.
 
 ```bash
 cd taskora-mobile
@@ -121,41 +154,42 @@ Kalite kontrolleri:
 ```bash
 flutter analyze
 flutter test
-flutter build apk --debug
-flutter build ios --simulator --no-codesign
 ```
 
-Ayrıntılar için [Mobile README](taskora-mobile/README.md) ve [Mobil Gereksinim Kontrolü](taskora-mobile/MOBILE_GEREKSINIM_KONTROLU.md) dosyalarına bakın.
+### Database
 
-## Veri Mimarisi
+[SQL dosyasını](taskora-database/YigitKaanBilir_Taskora_Proje.sql) SQL Server Management Studio ile açıp yeni bir SQL Server örneğinde çalıştırın. Backup adımı için SQL Server makinesinde `C:\Yedek` klasörünün ve servis hesabı yazma izninin bulunması gerekir.
 
-Dört proje aynı depoda tutulur ve kendi teslim senaryosuna göre bağımsız çalışır:
+## Doğrulama
 
-```text
-Taskora Backend  ──> src/data/tasks.json
-Taskora Web      ──> Browser LocalStorage
-Taskora Database ──> Microsoft SQL Server / TaskoraDB
-Taskora Mobile   ──> Android SharedPreferences / iOS UserDefaults
-```
-
-Modüller aynı görev ve ekip yönetimi senaryosunu kullanır. Backend, Web ve Mobile mevcut sürümde kendi yerel veri kaynaklarıyla bağımsız çalışır; TaskoraDB ilişkisel veri katmanını temsil eder.
+| Alan | Yapılan kontrol |
+| --- | --- |
+| Backend | Postman üzerinden CRUD ve hata senaryoları |
+| Web | Vite production build ve Netlify yayını |
+| Database | SQL Server 2022 üzerinde temiz kurulum, sorgular, VIEW ve `RESTORE VERIFYONLY` |
+| Mobile | `flutter analyze`, widget testleri, Android debug ve iOS Simulator build |
 
 ## Depo Yapısı
 
 ```text
 Taskora/
-├── taskora-backend/                 # Node.js / Express REST API
-├── taskora-web/                     # React / Vite web uygulaması
-├── taskora-database/                # SQL Server / TaskoraDB projesi
-└── taskora-mobile/                  # Flutter mobil uygulaması
+├── taskora-backend/     # Express REST API
+├── taskora-web/         # React web uygulaması
+├── taskora-database/    # SQL Server veri modeli
+└── taskora-mobile/      # Flutter mobil uygulaması
 ```
 
-## Dokümantasyon
+## Teknik Dokümantasyon
 
-- [Backend proje dokümanı](taskora-backend/docs/Taskora_Backend_Proje_Tanitim_Dokumani.pdf)
-- [Backend Postman testleri](taskora-backend/POSTMAN_TESTLERI.md)
-- [Web ekran görüntüleri](taskora-web/screenshots/)
-- [Database proje ve teslim dosyaları](taskora-database/)
-- [Mobile ekran görüntüleri](taskora-mobile/screenshots/)
+- [Backend kurulum ve API dokümanı](taskora-backend/README.md)
+- [Backend Postman test rehberi](taskora-backend/POSTMAN_TESTLERI.md)
+- [Web kurulum dokümanı](taskora-web/README.md)
+- [Database kurulum dokümanı](taskora-database/README.md)
+- [Mobile kurulum dokümanı](taskora-mobile/README.md)
 
-Her modülün çalıştırma ve test ayrıntıları kendi README dosyasında tutulur.
+## Geliştirme Yol Haritası
+
+- Web ve Mobile istemcilerini ortak Backend API’ye bağlamak
+- JSON ve LocalStorage veri kaynaklarını TaskoraDB ile birleştirmek
+- Sunucu tabanlı kimlik doğrulama ve yetkilendirme eklemek
+- Otomatik test ve CI iş akışları oluşturmak

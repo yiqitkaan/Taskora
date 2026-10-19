@@ -4,6 +4,10 @@
 
 Taskora Web, görevleri tek ekranda yönetmek için hazırlanan React uygulamasıdır. Bu sürüm LocalStorage kullanmaktadır. Taskora Backend REST API entegrasyonu sonraki geliştirme aşaması olarak planlanmıştır.
 
+**Canlı uygulama:** <https://idyllic-belekoy-ce4466.netlify.app>
+
+Bu modül, Software Persona Yazılım / Kariyer Merkezi 18. Dönem programındaki web geliştirme çalışmasının Taskora ürün senaryosuna uyarlanmış sürümüdür.
+
 ## Özellikler
 
 - Görev ekleme, listeleme, güncelleme ve silme
