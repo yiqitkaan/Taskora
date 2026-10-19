@@ -12,7 +12,7 @@ Taskora; görev ve ekip yönetimi için backend, web, veritabanı ve mobil bile�
 | --- | --- | --- | --- | --- |
 | 1 | Backend | Node.js, Express.js, JavaScript, REST API | Yerel JSON | CRUD, routing, logger ve istek doğrulama |
 | 2 | Web | React, JavaScript, Vite, Tailwind CSS | LocalStorage | CRUD, arama, filtreleme ve kalıcılık çalışıyor |
-| 3 | Database / SQL | Microsoft SQL Server, T-SQL | TaskoraDB | İlişkisel veri katmanı geliştirme aşamasında |
+| 3 | Database / SQL | Microsoft SQL Server 2022, T-SQL | NovaStoreDB | E-ticaret şeması, analiz sorguları, VIEW ve yedekleme |
 | 4 | Mobile | Flutter, Dart, Material Design | Cihazda kalıcı yerel JSON | Giriş, kayıt ve çevrim dışı görev yönetimi |
 
 ## 1. Taskora Backend
@@ -79,9 +79,21 @@ npm run preview
 
 Ayrıntılar için [Web README](taskora-web/README.md) dosyasına bakın.
 
-## 3. Taskora Database / SQL
+## 3. NovaStore Database / SQL
 
-Microsoft SQL Server ve T-SQL tabanlı `TaskoraDB` veri katmanı geliştirme aşamasındadır. Hedef şema; kullanıcılar, projeler, görevler, yorumlar ve proje üyelikleri arasındaki ilişkileri kapsar.
+[`taskora-database/`](taskora-database/) altında Microsoft SQL Server 2022 ve T-SQL ile geliştirilen NovaStore e-ticaret veritabanı bulunur.
+
+### Özellikler
+
+- Categories, Products, Customers, Orders ve OrderDetails tabloları
+- Primary Key, Foreign Key, UNIQUE, CHECK ve DEFAULT kısıtları
+- 5 kategori, 12 ürün, 6 müşteri, 10 sipariş ve 22 sipariş detayı
+- WHERE, ORDER BY, JOIN, GROUP BY, COUNT, SUM, DATEDIFF ve GETDATE analizleri
+- `dbo.vw_SiparisOzet` görünümü
+- Tam veritabanı yedeği ve RESTORE VERIFYONLY doğrulaması
+- Gerçek SQL Server sonuçlarını içeren Word raporu ve ilişki şeması
+
+Teslim dosyaları ve çalıştırma adımları için [Database README](taskora-database/README.md) dosyasına bakın.
 
 ## 4. Taskora Mobile
 
@@ -116,26 +128,18 @@ flutter build ios --simulator --no-codesign
 
 Ayrıntılar için [Mobile README](taskora-mobile/README.md) ve [Mobil Gereksinim Kontrolü](taskora-mobile/MOBILE_GEREKSINIM_KONTROLU.md) dosyalarına bakın.
 
-## Mevcut Veri Mimarisi
+## Veri Mimarisi
 
-Modüller bağımsız çalışacak şekilde hazırlanmıştır:
+Dört proje aynı depoda tutulur ve kendi teslim senaryosuna göre bağımsız çalışır:
 
 ```text
 Taskora Backend  ──> src/data/tasks.json
 Taskora Web      ──> Browser LocalStorage
-Taskora Database ──> Microsoft SQL Server / TaskoraDB (planlanan)
+NovaStore Database ─> Microsoft SQL Server / NovaStoreDB
 Taskora Mobile   ──> Android SharedPreferences / iOS UserDefaults
 ```
 
-Hedeflenen sonraki entegrasyon:
-
-```text
-Taskora Web ────┐
-                ├──> Taskora Backend ──> TaskoraDB
-Taskora Mobile ─┘
-```
-
-Web ve Mobile uygulamaları şu anda Backend API'ye istek göndermez. Backend de TaskoraDB yerine yerel JSON dosyası kullanır.
+Taskora Backend, Web ve Mobile görev yönetimi senaryosunu kullanır. NovaStore Database ise e-ticaret veri yönetimi senaryosunu uygular.
 
 ## Depo Yapısı
 
@@ -143,6 +147,7 @@ Web ve Mobile uygulamaları şu anda Backend API'ye istek göndermez. Backend de
 Taskora/
 ├── taskora-backend/                 # Node.js / Express REST API
 ├── taskora-web/                     # React / Vite web uygulaması
+├── taskora-database/                # SQL Server / NovaStoreDB projesi
 └── taskora-mobile/                  # Flutter mobil uygulaması
 ```
 
@@ -151,6 +156,7 @@ Taskora/
 - [Backend proje dokümanı](taskora-backend/docs/Taskora_Backend_Proje_Tanitim_Dokumani.pdf)
 - [Backend Postman testleri](taskora-backend/POSTMAN_TESTLERI.md)
 - [Web ekran görüntüleri](taskora-web/screenshots/)
+- [Database proje ve teslim dosyaları](taskora-database/)
 - [Mobile ekran görüntüleri](taskora-mobile/screenshots/)
 
 Her modülün çalıştırma ve test ayrıntıları kendi README dosyasında tutulur.
